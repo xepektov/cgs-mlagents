@@ -1,0 +1,6 @@
+Sbehaviors:
+  My Behaviour:
+    trainer_type: poca
+    hyperparameters:
+      learning_rate: 0.0003
+      

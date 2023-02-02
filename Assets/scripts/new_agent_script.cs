@@ -11,7 +11,8 @@ public class new_agent_script : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.position = Vector3.zero;
+        transform.localPosition = new Vector3(Random.RandomRange(-70, 60), 0, Random.RandomRange(-100, 100));
+        target.localPosition = new Vector3(Random.RandomRange(-70, 60), 0, Random.RandomRange(-100, 100));
     }
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -19,27 +20,27 @@ public class new_agent_script : Agent
         float moveX = actions.ContinuousActions[0];
         float moveZ = actions.ContinuousActions[1];
 
-        float speed = 1;
+        float speed = 20;
 
-        transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * speed;
+        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * speed;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.position);
-        sensor.AddObservation(target.position);
+        sensor.AddObservation(transform.localPosition);
+        sensor.AddObservation(target.localPosition);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<goal>(out goal goal))
+        if(other.gameObject.tag == "goal")
         {
             SetReward(1f);
             EndEpisode();
         }
-        else if(other.TryGetComponent<wall>(out wall wall))
+        else if(other.gameObject.tag == "wall")
         {
-            SetReward(-1f);
+            SetReward(1f);
             EndEpisode();
         }
         

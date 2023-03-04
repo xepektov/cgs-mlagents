@@ -1,23 +1,41 @@
 {
-    "My Behavior": {
+    "Crawler": {
         "checkpoints": [
             {
-                "steps": 0,
-                "file_path": "results\\ppo\\My Behavior\\My Behavior-0.onnx",
-                "reward": null,
-                "creation_time": 1672247570.8089442,
+                "steps": 1128,
+                "file_path": "results\\ppo\\Crawler\\Crawler-1128.onnx",
+                "reward": 0.07479549385607243,
+                "creation_time": 1677671141.6390455,
                 "auxillary_file_paths": [
-                    "results\\ppo\\My Behavior\\My Behavior-0.pt"
+                    "results\\ppo\\Crawler\\Crawler-1128.pt"
+                ]
+            },
+            {
+                "steps": 6512,
+                "file_path": "results\\ppo\\Crawler\\Crawler-6512.onnx",
+                "reward": 7.491974541917443,
+                "creation_time": 1677678716.951193,
+                "auxillary_file_paths": [
+                    "results\\ppo\\Crawler\\Crawler-6512.pt"
+                ]
+            },
+            {
+                "steps": 28344,
+                "file_path": "results\\ppo\\Crawler\\Crawler-28344.onnx",
+                "reward": 1.0004373744595796,
+                "creation_time": 1677682311.6760914,
+                "auxillary_file_paths": [
+                    "results\\ppo\\Crawler\\Crawler-28344.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 0,
-            "file_path": "results\\ppo\\My Behavior.onnx",
-            "reward": null,
-            "creation_time": 1672247570.8089442,
+            "steps": 28344,
+            "file_path": "results\\ppo\\Crawler.onnx",
+            "reward": 1.0004373744595796,
+            "creation_time": 1677682311.6760914,
             "auxillary_file_paths": [
-                "results\\ppo\\My Behavior\\My Behavior-0.pt"
+                "results\\ppo\\Crawler\\Crawler-28344.pt"
             ]
         }
     },
@@ -25,5 +43,27 @@
         "stats_format_version": "0.3.0",
         "mlagents_version": "0.30.0",
         "torch_version": "1.7.1+cu110"
+    },
+    "follow": {
+        "checkpoints": [
+            {
+                "steps": 464126,
+                "file_path": "results\\ppo\\follow\\follow-464126.onnx",
+                "reward": 0.9659090909090909,
+                "creation_time": 1677681068.3701167,
+                "auxillary_file_paths": [
+                    "results\\ppo\\follow\\follow-464126.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 464126,
+            "file_path": "results\\ppo\\follow.onnx",
+            "reward": 0.9659090909090909,
+            "creation_time": 1677681068.3701167,
+            "auxillary_file_paths": [
+                "results\\ppo\\follow\\follow-464126.pt"
+            ]
+        }
     }
 }

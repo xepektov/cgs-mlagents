@@ -177,6 +177,8 @@ public class CrawlerAgent : Agent
         var continuousActions = actionBuffers.ContinuousActions;
         var i = -1;
         // Pick a new target joint rotation
+        Debug.Log(continuousActions[0]);
+        Debug.Log(continuousActions[10]);
         bpDict[leg0Upper].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[leg1Upper].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[leg2Upper].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);

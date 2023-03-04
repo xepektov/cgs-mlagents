@@ -70,7 +70,7 @@ namespace Unity.MLAgentsExamples
         public void SetJointTargetRotation(float x, float y, float z)
         {
             x = (x + 1f) * 0.5f;
-            y = (y + 1f) * 0.5f;
+            y = (y + 1f) * 0.5f;  //x,y,z are continuousActions (-1 -> 1) we convert this to (0 -> 1)
             z = (z + 1f) * 0.5f;
 
             var xRot = Mathf.Lerp(joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, x);

@@ -1,0 +1,5 @@
+venv\Scripts\activate
+
+mlagents-learn Assets/config/ppo/Crawler1.yaml --run-id=crawler1_nobrain_-trgtvel --resume
+
+mlagents-learn Assets/config/ppo/Crawler_velgoal.yaml --run-id=crawler_velgoal --resume

@@ -1,0 +1,65 @@
+{
+    "Crawler_velgoal": {
+        "checkpoints": [
+            {
+                "steps": 1053600,
+                "file_path": "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1053600.onnx",
+                "reward": 352.1748352050781,
+                "creation_time": 1678550835.6048517,
+                "auxillary_file_paths": [
+                    "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1053600.pt"
+                ]
+            },
+            {
+                "steps": 1137600,
+                "file_path": "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.onnx",
+                "reward": null,
+                "creation_time": 1678551512.086943,
+                "auxillary_file_paths": [
+                    "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.pt"
+                ]
+            },
+            {
+                "steps": 1137600,
+                "file_path": "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.onnx",
+                "reward": null,
+                "creation_time": 1684738513.8667996,
+                "auxillary_file_paths": [
+                    "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.pt"
+                ]
+            },
+            {
+                "steps": 1137600,
+                "file_path": "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.onnx",
+                "reward": null,
+                "creation_time": 1684954947.7336035,
+                "auxillary_file_paths": [
+                    "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.pt"
+                ]
+            },
+            {
+                "steps": 1137600,
+                "file_path": "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.onnx",
+                "reward": null,
+                "creation_time": 1684955039.1890907,
+                "auxillary_file_paths": [
+                    "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1137600,
+            "file_path": "results\\crawler_velgoal\\Crawler_velgoal.onnx",
+            "reward": null,
+            "creation_time": 1684955039.1890907,
+            "auxillary_file_paths": [
+                "results\\crawler_velgoal\\Crawler_velgoal\\Crawler_velgoal-1137600.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

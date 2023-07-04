@@ -20,6 +20,9 @@ public class new_agent_script : Agent
         float moveX = actions.ContinuousActions[0];
         float moveZ = actions.ContinuousActions[1];
 
+
+
+
         float speed = 20;
 
         transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * speed;

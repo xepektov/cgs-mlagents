@@ -1,0 +1,65 @@
+{
+    "Crawler1": {
+        "checkpoints": [
+            {
+                "steps": 97000,
+                "file_path": "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-97000.onnx",
+                "reward": null,
+                "creation_time": 1678134494.8582606,
+                "auxillary_file_paths": [
+                    "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-97000.pt"
+                ]
+            },
+            {
+                "steps": 157000,
+                "file_path": "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-157000.onnx",
+                "reward": null,
+                "creation_time": 1678135006.661153,
+                "auxillary_file_paths": [
+                    "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-157000.pt"
+                ]
+            },
+            {
+                "steps": 167000,
+                "file_path": "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-167000.onnx",
+                "reward": 10.062558041512967,
+                "creation_time": 1678135750.5266795,
+                "auxillary_file_paths": [
+                    "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-167000.pt"
+                ]
+            },
+            {
+                "steps": 257000,
+                "file_path": "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-257000.onnx",
+                "reward": null,
+                "creation_time": 1678136880.2871606,
+                "auxillary_file_paths": [
+                    "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-257000.pt"
+                ]
+            },
+            {
+                "steps": 383000,
+                "file_path": "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-383000.onnx",
+                "reward": 71.75054944886102,
+                "creation_time": 1678444276.625949,
+                "auxillary_file_paths": [
+                    "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-383000.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 383000,
+            "file_path": "results\\crawler1_nobrain_-trgtvel\\Crawler1.onnx",
+            "reward": 71.75054944886102,
+            "creation_time": 1678444276.625949,
+            "auxillary_file_paths": [
+                "results\\crawler1_nobrain_-trgtvel\\Crawler1\\Crawler1-383000.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

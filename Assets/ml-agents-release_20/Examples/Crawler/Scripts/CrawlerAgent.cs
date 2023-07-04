@@ -56,7 +56,11 @@ public class CrawlerAgent : Agent
     DirectionIndicator m_DirectionIndicator;
     JointDriveController m_JdController;
 
-    [Header("Foot Grounded Visualization")]
+    public float initial_distance;
+    public float current_distance;
+    public float distance_reward;
+
+ /*   [Header("Foot Grounded Visualization")]
     [Space(10)]
     public bool useFootGroundedVisualization;
 
@@ -65,7 +69,7 @@ public class CrawlerAgent : Agent
     public MeshRenderer foot2;
     public MeshRenderer foot3;
     public Material groundedMaterial;
-    public Material unGroundedMaterial;
+    public Material unGroundedMaterial;*/
 
     public override void Initialize()
     {
@@ -102,6 +106,11 @@ public class CrawlerAgent : Agent
     /// </summary>
     public override void OnEpisodeBegin()
     {
+        //
+        initial_distance = Vector3.Distance(m_Target.transform.localPosition, this.transform.localPosition);
+        //
+
+
         foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
         {
             bodyPart.Reset(bodyPart);
@@ -116,17 +125,22 @@ public class CrawlerAgent : Agent
         TargetWalkingSpeed = Random.Range(0.1f, m_maxWalkingSpeed);
     }
 
+    int i = 0;
+
     /// <summary>
     /// Add relevant information on each body part to observations.
     /// </summary>
     public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
     {
+        
         //GROUND CHECK
-        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
+        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground (9 observations)
+        Debug.Log(++i);
 
         if (bp.rb.transform != body)
         {
-            sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
+            sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit); // (8 observations)
+            Debug.Log(++i);
         }
     }
 
@@ -135,6 +149,8 @@ public class CrawlerAgent : Agent
     /// </summary>
     public override void CollectObservations(VectorSensor sensor)
     {
+        i = 0;
+
         var cubeForward = m_OrientationCube.transform.forward;
 
         //velocity we want to match
@@ -144,28 +160,40 @@ public class CrawlerAgent : Agent
 
         //current ragdoll velocity. normalized
         sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
+        Debug.Log("(1)  relvel avg-target");
         //avg body vel relative to cube
+
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(avgVel));
+        Debug.Log("(3)  avgvel");
+
         //vel goal relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
+//        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
+       Debug.Log("(3)  target_vel_vector3");
         //rotation delta
+
         sensor.AddObservation(Quaternion.FromToRotation(body.forward, cubeForward));
+        Debug.Log("(4)  rotation delta");
 
         //Add pos of target relative to orientation cube
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(m_Target.transform.position));
+        Debug.Log("(3)  relative target position");
 
         RaycastHit hit;
         float maxRaycastDist = 10;
         if (Physics.Raycast(body.position, Vector3.down, out hit, maxRaycastDist))
         {
             sensor.AddObservation(hit.distance / maxRaycastDist);
+            Debug.Log("(1)  head ground distance");
         }
         else
-            sensor.AddObservation(1);
+            sensor.AddObservation(1f);    //probably the extra observation i was missing, was it?
+
+        //int i = 0;
 
         foreach (var bodyPart in m_JdController.bodyPartsList)
         {
             CollectObservationBodyPart(bodyPart, sensor);
+            //Debug.Log(++i);
         }
     }
 
@@ -177,8 +205,8 @@ public class CrawlerAgent : Agent
         var continuousActions = actionBuffers.ContinuousActions;
         var i = -1;
         // Pick a new target joint rotation
-        Debug.Log(continuousActions[0]);
-        Debug.Log(continuousActions[10]);
+ //       Debug.Log(continuousActions[0]);
+ //       Debug.Log(continuousActions[10]);
         bpDict[leg0Upper].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[leg1Upper].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[leg2Upper].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
@@ -203,6 +231,12 @@ public class CrawlerAgent : Agent
     {
         UpdateOrientationObjects();
 
+        current_distance = Vector3.Distance(m_Target.transform.localPosition, this.transform.localPosition);
+        distance_reward = (initial_distance - Vector3.Distance(m_Target.transform.localPosition, this.transform.localPosition)) / (initial_distance);
+        //AddReward(distance_reward);
+
+
+/*
         // If enabled the feet will light up green when the foot is grounded.
         // This is just a visualization and isn't necessary for function
         if (useFootGroundedVisualization)
@@ -220,6 +254,8 @@ public class CrawlerAgent : Agent
                 ? groundedMaterial
                 : unGroundedMaterial;
         }
+*/
+
 
         var cubeForward = m_OrientationCube.transform.forward;
 
@@ -233,6 +269,8 @@ public class CrawlerAgent : Agent
         var lookAtTargetReward = (Vector3.Dot(cubeForward, body.forward) + 1) * .5F;
 
         AddReward(matchSpeedReward * lookAtTargetReward);
+
+        //AddReward(lookAtTargetReward);
     }
 
     /// <summary>
@@ -241,10 +279,10 @@ public class CrawlerAgent : Agent
     void UpdateOrientationObjects()
     {
         m_OrientationCube.UpdateOrientation(body, m_Target);
-        if (m_DirectionIndicator)
-        {
-            m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
-        }
+    //    if (m_DirectionIndicator)
+    //    {
+    //        m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
+    //    }
     }
 
     /// <summary>
@@ -272,6 +310,9 @@ public class CrawlerAgent : Agent
     /// <summary>
     /// Normalized value of the difference in actual speed vs goal walking speed.
     /// </summary>
+    /// 
+
+
     public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
     {
         //distance between our actual velocity and goal velocity
@@ -281,6 +322,8 @@ public class CrawlerAgent : Agent
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / TargetWalkingSpeed, 2), 2);
     }
+
+
 
     /// <summary>
     /// Agent touched the target
